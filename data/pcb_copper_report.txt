@@ -1,0 +1,176 @@
+# PCB 分析报告
+
+元件数：28（100NF, 100NF1, 10NF, 10UF, 10UF, 10UF4, 13K1, 15UH1, 3K1, 470NF, 7UF, C3, C4, D2, LED, LGS1, OLED4, R10, R11, R12, R7, R9, SW9, U2, U8, U9, USB3, USBC3）
+走线：352 段 / 过孔：54 个 / 铺铜定义：11 块
+
+## 各网络走线数量
+  VCC      61 段, 7 过孔
+  IN+      36 段, 7 过孔
+  IN-      25 段, 1 过孔
+  C0-SDA   24 段, 3 过孔
+  GND      20 段, 9 过孔
+  SDA      17 段, 2 过孔
+  CS       15 段, 2 过孔
+  DC       15 段, 2 过孔
+  ALERT    13 段, 2 过孔
+  SCL      13 段, 2 过孔
+  CC1      13 段, 0 过孔
+  DP1      13 段, 0 过孔
+  DN1      13 段, 0 过孔
+  OLEDRES  12 段, 3 过孔
+  C0-SCL   11 段, 2 过孔
+  SW       10 段, 5 过孔
+  SWCLK    10 段, 2 过孔
+  SWDIO    7 段, 2 过孔
+  NRST     6 段, 1 过孔
+  $1N199   4 段, 0 过孔
+  BST      4 段, 1 过孔
+  NET3     4 段, 0 过孔
+  FB3      3 段, 0 过孔
+  $1N10    3 段, 1 过孔
+
+## 焊盘 → 网络（None = 无走线端点，可能靠铺铜）
+  100NF    2:None; 1:['VCC']
+  100NF1   2:['BST']; 1:['SW']
+  10NF     2:['NRST']; 1:['GND']
+  10UF     2:None; 1:['VCC']; 2:None; 1:None
+  10UF4    2:['GND']; 1:None
+  13K1     2:['FB3']; 1:['VCC']
+  15UH1    2:None; 1:None
+  3K1      2:['FB3']; 1:None
+  470NF    2:['$1N199']; 1:None
+  7UF      2:['IN+']; 1:None
+  C3       2:None; 1:['IN-']
+  C4       2:None; 1:None
+  D2       1:['SW']; 2:None
+  LED      2:['VCC']; 1:['$1N10']
+  LGS1     1:['BST']; 2:None; 3:['FB3']; 4:['IN+']; 5:['IN+']; 6:['SW']
+  OLED4    7:['CS']; 6:['DC']; 5:['OLEDRES']; 4:['C0-SDA']; 3:['C0-SCL']; 2:['VCC']; 1:None
+  R10      2:['VCC']; 1:['ALERT']
+  R11      2:['VCC']; 1:['SDA']
+  R12      2:['$1N10']; 1:None
+  R7       2:['IN+']; 1:None
+  R9       2:None; 1:['SCL']
+  SW9      1:['NET3']; 2:None
+  U2       1:['SWDIO']; 2:['SWCLK']; 3:['VCC']; 4:None
+  U8       1:None; 2:None; 3:None; 4:None; 5:None; 6:None; 7:None; 8:None; 9:['SDA']; 10:['SCL']; 11:None; 12:['SWDIO']; 13:['SWCLK']; 14:None; 15:None; 16:None; 17:None; 18:['C0-SDA']; 19:None; 20:None; 21:None; 22:None; 23:None; 24:None; 25:None; 26:None; 27:None; 28:None; 29:None; 30:None; 31:None; 32:['$1N199']; 33:None; 34:None; 35:None; 36:None; 37:None; 38:['NRST']; 39:['C0-SCL']; 40:['VCC']; 41:['GND']; 42:None; 43:['C0-SDA']; 44:['C0-SCL']; 45:None; 46:None; 47:None; 48:None; 49:['OLEDRES']; 50:None; 51:None; 52:None; 53:None; 54:None; 55:None; 56:None; 57:None; 58:['CS']; 59:['DC']; 60:None; 61:None; 62:['SWCLK']; 63:['NET3']; 64:['ALERT']
+  U9       1:None; 2:None; 3:['ALERT']; 4:['SDA']; 5:['SCL']; 6:['VCC']; 7:['GND']; 8:['IN+']; 9:['IN-']; 10:['IN+']
+  USB3     A1:None; A2:None; A3:None; A4:None; B12:None; B11:None; B10:None; B9:None; A5:None; A6:None; A7:None; A12:None; 25:None; 26:None; 25:None; 26:None
+  USBC3    B8:None; A5:None; B7:None; A6:None; A7:None; B6:None; A8:None; B5:None; A1B12:None; B1A12:None; B4A9:None; A4B9:None; 2:None; 1:None; 4:None; 3:None
+
+## 各网络焊盘到铜箔的距离（排查“没连上”的焊盘）
+   * 距离单位 mm；>1mm 基本可以认为没有走线连接
+  100NF    pad 2    (1080,-590) 最近铜箔：IN+ 0.6mm / C0-SCL 0.9mm
+  10UF     pad 2    (1163,-572) 最近铜箔：GND(via) 0.1mm / GND(via) 0.8mm
+  10UF     pad 2    (1328,-228) 最近铜箔：IN+ 3.4mm / IN+(via) 3.5mm
+  10UF     pad 1    (1328,-394) 最近铜箔：IN+ 0.1mm / IN+(via) 0.2mm
+  10UF4    pad 1    (1203,-765) 最近铜箔：VCC 0.1mm / VCC(via) 0.3mm
+  15UH1    pad 2    (1315,-726) 最近铜箔：FB3 0.2mm / VCC 0.6mm
+  15UH1    pad 1    (1441,-726) 最近铜箔：SW 0.4mm / SW(via) 1.4mm
+  3K1      pad 1    (1318,-776) 最近铜箔：ALERT 1.0mm / VCC 1.4mm
+  470NF    pad 1    (1050,-881) 最近铜箔：C0-SCL 0.2mm / DN1 0.8mm
+  7UF      pad 1    (1407,-501) 最近铜箔：SW 1.6mm / SW(via) 1.9mm
+  C3       pad 2    (1285,-992) 最近铜箔：IN+ 0.0mm / VCC 1.1mm
+  C4       pad 2    (1400,-1046) 最近铜箔：IN+ 0.5mm / IN- 0.7mm
+  C4       pad 1    (1345,-1046) 最近铜箔：IN- 0.1mm / VCC 0.4mm
+  D2       pad 2    (1418,-763) 最近铜箔：SW 0.9mm / ALERT 1.7mm
+  LGS1     pad 2    (1233,-616) 最近铜箔：FB3 0.9mm / BST 0.9mm
+  OLED4    pad 1    (693,-1116) 最近铜箔：DN1 1.1mm / C0-SDA 1.3mm
+  R12      pad 1    (1352,-1231) 最近铜箔：VCC 0.5mm / $1N10 1.5mm
+  R7       pad 1    (847,-866) 最近铜箔：IN- 1.3mm / IN-(via) 1.4mm
+  R9       pad 2    (1303,-921) 最近铜箔：VCC 0.8mm / SCL 1.0mm
+  SW9      pad 2    (896,-240) 最近铜箔：VCC 0.8mm / IN+ 1.0mm
+  U2       pad 4    (870,-350) 最近铜箔：IN+ 1.6mm / VCC 1.8mm
+  U8       pad 1    (546,-495) 最近铜箔：DC 0.8mm / SWDIO 1.1mm
+  U8       pad 2    (546,-515) 最近铜箔：DC 0.4mm / SWDIO 1.1mm
+  U8       pad 3    (546,-534) 最近铜箔：DC 0.1mm / CS 0.8mm
+  U8       pad 4    (546,-554) 最近铜箔：DC 0.3mm / CS 0.4mm
+  U8       pad 5    (546,-574) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 6    (546,-593) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 7    (546,-613) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 8    (546,-633) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 11   (546,-692) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 14   (546,-751) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 15   (546,-771) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 16   (546,-790) 最近铜箔：CS 0.3mm / DC 0.4mm
+  U8       pad 17   (623,-867) 最近铜箔：C0-SDA 0.5mm / C0-SDA(via) 1.2mm
+  U8       pad 19   (662,-867) 最近铜箔：C0-SDA 0.5mm / C0-SDA(via) 1.2mm
+  U8       pad 20   (682,-867) 最近铜箔：C0-SDA 1.0mm / IN- 1.3mm
+  U8       pad 21   (702,-867) 最近铜箔：IN- 1.3mm / C0-SDA 1.5mm
+  U8       pad 22   (721,-867) 最近铜箔：IN- 1.3mm / C0-SDA 2.0mm
+  U8       pad 23   (741,-867) 最近铜箔：IN- 1.3mm / CC1 2.0mm
+  U8       pad 24   (761,-867) 最近铜箔：IN- 1.3mm / CC1 2.0mm
+  U8       pad 25   (780,-867) 最近铜箔：IN- 1.3mm / CC1 2.0mm
+  U8       pad 26   (800,-867) 最近铜箔：IN- 1.3mm / IN-(via) 1.8mm
+  U8       pad 27   (820,-867) 最近铜箔：IN- 1.3mm / IN-(via) 1.5mm
+  U8       pad 28   (839,-867) 最近铜箔：IN- 1.3mm / IN-(via) 1.4mm
+  U8       pad 29   (859,-867) 最近铜箔：IN- 1.3mm / IN-(via) 1.4mm
+  U8       pad 30   (879,-867) 最近铜箔：$1N199 1.0mm / OLEDRES 1.4mm
+  U8       pad 31   (898,-867) 最近铜箔：$1N199 0.5mm / OLEDRES 1.1mm
+  U8       pad 33   (994,-790) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 34   (994,-771) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 35   (994,-751) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 36   (994,-731) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 37   (994,-712) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 42   (994,-613) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 45   (994,-554) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 46   (994,-534) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 47   (994,-515) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 48   (994,-495) 最近铜箔：DP1 0.2mm / CC1 0.2mm
+  U8       pad 50   (898,-418) 最近铜箔：OLEDRES 0.5mm / VCC 1.1mm
+  U8       pad 51   (879,-418) 最近铜箔：OLEDRES 1.0mm / OLEDRES(via) 1.2mm
+  U8       pad 52   (859,-418) 最近铜箔：OLEDRES 1.3mm / OLEDRES(via) 1.4mm
+  U8       pad 53   (839,-418) 最近铜箔：OLEDRES 1.7mm / OLEDRES(via) 1.7mm
+  U8       pad 54   (820,-418) 最近铜箔：CS 2.0mm / OLEDRES 2.0mm
+  U8       pad 55   (800,-418) 最近铜箔：CS 1.5mm / VCC 1.9mm
+  U8       pad 56   (780,-418) 最近铜箔：CS 1.0mm / DC 1.5mm
+  U8       pad 57   (761,-418) 最近铜箔：CS 0.5mm / DC 1.0mm
+  U8       pad 60   (702,-418) 最近铜箔：DC 0.5mm / SWCLK 0.9mm
+  U8       pad 61   (682,-418) 最近铜箔：SWCLK 0.4mm / DC 1.0mm
+  U9       pad 1    (1422,-928) 最近铜箔：VCC 0.1mm / ALERT 1.0mm
+  U9       pad 2    (1402,-928) 最近铜箔：VCC 0.1mm / ALERT 0.5mm
+  USB3     pad A1   (890,-1306) 最近铜箔：IN- 1.8mm / GND 2.0mm
+  USB3     pad A2   (909,-1306) 最近铜箔：IN- 1.4mm / GND 1.6mm
+  USB3     pad A3   (929,-1306) 最近铜箔：GND 1.1mm / IN- 1.1mm
+  USB3     pad A4   (949,-1306) 最近铜箔：GND 0.6mm / IN- 1.0mm
+  USB3     pad B12  (968,-1306) 最近铜箔：GND 0.2mm / IN- 1.1mm
+  USB3     pad B11  (988,-1306) 最近铜箔：GND 0.5mm / IN- 1.4mm
+  USB3     pad B10  (1008,-1306) 最近铜箔：GND 1.0mm / IN- 1.1mm
+  USB3     pad B9   (1027,-1306) 最近铜箔：IN- 1.0mm / CC1 1.1mm
+  USB3     pad A5   (1047,-1306) 最近铜箔：CC1 1.0mm / DP1 1.1mm
+  USB3     pad A6   (1067,-1306) 最近铜箔：DP1 1.0mm / CC1 1.1mm
+  USB3     pad A7   (1086,-1306) 最近铜箔：DN1 1.0mm / DP1 1.1mm
+  USB3     pad A12  (1106,-1306) 最近铜箔：DN1 1.1mm / DP1 1.4mm
+  USB3     pad 25   (1155,-1266) 最近铜箔：DN1 1.7mm / DP1 2.2mm
+  USB3     pad 26   (840,-1266) 最近铜箔：IN- 1.6mm / CC1 1.9mm
+  USB3     pad 25   (1166,-1292) 最近铜箔：DN1 2.1mm / DP1 2.6mm
+  USB3     pad 26   (829,-1292) 最近铜箔：IN- 2.2mm / CC1 2.6mm
+  USBC3    pad B8   (941,-108) 最近铜箔：VCC 2.6mm / IN+ 4.0mm
+  USBC3    pad A5   (961,-108) 最近铜箔：VCC 2.7mm / IN+ 4.0mm
+  USBC3    pad B7   (980,-108) 最近铜箔：VCC 2.9mm / IN+ 4.0mm
+  USBC3    pad A6   (1000,-108) 最近铜箔：VCC 3.2mm / IN+ 4.0mm
+  USBC3    pad A7   (1020,-108) 最近铜箔：VCC 3.5mm / IN+ 4.0mm
+  USBC3    pad B6   (1040,-108) 最近铜箔：VCC 3.9mm / IN+ 4.0mm
+  USBC3    pad A8   (1059,-108) 最近铜箔：IN+ 4.0mm / VCC 4.3mm
+  USBC3    pad B5   (1079,-108) 最近铜箔：IN+ 4.0mm / VCC 4.6mm
+  USBC3    pad A1B12 (884,-108) 最近铜箔：VCC 2.6mm / IN+ 4.1mm
+  USBC3    pad B1A12 (1136,-108) 最近铜箔：IN+ 4.1mm / DN1 5.8mm
+  USBC3    pad B4A9 (1104,-108) 最近铜箔：IN+ 4.0mm / VCC 5.2mm
+  USBC3    pad A4B9 (916,-108) 最近铜箔：VCC 2.6mm / IN+ 4.0mm
+  USBC3    pad 2    (1180,-302) 最近铜箔：IN+ 1.2mm / IN+(via) 2.0mm
+  USBC3    pad 1    (1180,-138) 最近铜箔：IN+ 3.9mm / DN1 5.9mm
+  USBC3    pad 4    (840,-138) 最近铜箔：VCC 1.8mm / GND(via) 3.4mm
+  USBC3    pad 3    (840,-302) 最近铜箔：VCC 1.0mm / IN+ 1.9mm
+
+## 铺铜
+  IN+    layer=2 填充数据=空(未生成) [[1054.167, -936.9725, "L", 1057.3659, -933.7736, 1057.3659, -390.0651, 1085, -362.4311, 1
+  IN+    layer=1 填充数据=空(未生成) [[1150, -340, "L", 1360, -340, 1367.7738, -347.7738, 1367.7738, -519.4805, 1350.6206, -536
+  SW     layer=2 填充数据=空(未生成) [[1286.8246, -542.5962, "L", 1286.8456, -542.5752, 1468.9188, -542.5752, 1479.7738, -553.4
+  VCC    layer=2 填充数据=空(未生成) [[1177.5768, -743.929, "L", 1186.5058, -735, 1230, -735, 1277.7738, -687.2262, 1277.7738, 
+  VCC    layer=1 填充数据=空(未生成) [[1127.0248, -759.7533, "L", 1164.7533, -759.7533, 1165, -760, 1167.1988, -757.8012, 1167.
+  IN-    layer=2 填充数据=空(未生成) [[870, -795, "L", 870, -925, 875, -930, 685, -930, 680, -925, 597.7738, -1007.2262, 597.77
+  VCC    layer=1 填充数据=空(未生成) [[1238.3488, -741.812, "L", 1260, -763.4631, 1260, -941.5508, 1198.7908, -1002.7601, 947.3
+  VCC    layer=2 填充数据=空(未生成) [[760, -1150, "L", 760, -1010, 775, -995, 925, -995, 967.7738, -952.2262, 967.7738, -945, 
+  VCC    layer=2 填充数据=空(未生成) [[1165, -925, "L", 1260, -925, 1260, -924.5739, 1284.5739, -900, 1450, -900, 1450, -955.37
+  GND    layer=1 填充数据=空(未生成) [["R", 410, -125, 1185, 1380, 0, 0]]
+  GND    layer=2 填充数据=空(未生成) [["R", 275, -35, 1465, 1545, 0, 0]]

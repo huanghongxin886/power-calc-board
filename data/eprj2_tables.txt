@@ -1,0 +1,39 @@
+# 功率计算器总.eprj2 —— SQLite 元数据（正文加密，无法解密）
+
+attributes                               0
+backups                                  0
+block_symbol_attributes                  0
+boards                                   0
+branch_locks                             0
+branches                                 2
+broadcast_messages                       0
+categories                               0
+component_histories                      0
+components                               0
+components_tmp                           0
+coppers                                  0
+db_paths                                 0
+db_versions                              1
+devices                                  0
+documents                                0
+editor_caches                            0
+history_data                             88
+notifications                            0
+project_histories                        0
+project_history_1d7b762c1bb442da8283b432ba9fa7d9 62
+project_images                           2
+project_logs                             0
+project_members                          1
+project_structures                       74
+projects                                 1
+resources                                0
+schematics                               0
+sessions                                 0
+sqlite_sequence                          4
+system_attributes                        0
+system_config                            0
+team_members                             0
+texts                                    0
+users                                    1
+
+# 提示：连接性分析请用同目录 _backup/*.epro2
