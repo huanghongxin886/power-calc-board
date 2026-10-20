@@ -5,6 +5,10 @@
 > 板子：USB 直插式功率计（Type-C 公头 + USB-A 公头一体），约 25 × 30 mm，2 层板。
 > 主控：**TI MSPM0G3507SPMR**（LQFP-64，Cortex-M0+） ｜ 计量：**INA228AIDGSR** ｜ 显示：HS96L01W4S03（7P 排针） ｜ 电源：**LGS5145** 降压到 3.3V
 
+| 实物（主控侧） | 原理图 |
+|---|---|
+| ![实物](hardware/photos/board-02.jpg) | ![原理图](hardware/render/schematic.png) |
+
 ---
 
 ## 1. 目录结构
