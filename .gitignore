@@ -14,3 +14,7 @@ desktop.ini
 .DS_Store
 .vscode/
 .idea/
+
+# 生成的浏览页 / 本地 ssh 临时文件
+view.html
+.tmp_known_hosts

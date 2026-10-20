@@ -41,3 +41,34 @@ python eprj_tool.py pcb build/功率计算器总.epru -o ../data/pcb_copper_repo
 4. 封装里焊盘坐标在 `centerX/centerY`，不是 `x/y`（用错会全落到原点）。
 5. `sqlite3` 里**不要用同一个 cursor 嵌套查询**：`for name in cur.execute(...)` 里再 `cur.execute(...)` 会把外层迭代重置，只跑一行。
 6. `.epru` 里少数中文字符是 GBK 残留，按 `errors='replace'` 读，别当异常处理。
+
+## 4. make_site.py —— 生成离线浏览页
+
+```bash
+python tools/make_site.py -o view.html
+```
+
+生成**单文件自包含**的 HTML（Markdown 渲染 + 所有文本文件 + 图片 base64 内嵌），
+双击就能像 GitHub 那样翻 README、网表、照片。不依赖服务器、不依赖 CDN。
+`view.html` 已进 `.gitignore`（生成物，不入库）。
+
+## 5. 从这台机器 push 到 GitHub 的坑
+
+这台机器有两个限制，`git push` 直接跑会失败：
+
+1. **22 端口被封** → 只能走 `ssh.github.com:443`，所以 remote 写成
+   `ssh://git@ssh.github.com:443/<user>/<repo>.git`（端口写在 URL 里）。
+2. **沙箱下 MSYS 的 `sh.exe` 起不来**（`couldn't create signal pipe, Win32 error 5`）。
+   而 git 一旦设置了 `core.sshCommand` / `GIT_SSH_COMMAND`，就会把命令交给 sh 执行 →
+   报 `fatal: Could not read from remote repository`（其实仓库是存在的）。
+
+解决办法：**别让 git 走 sh**，用 `GIT_SSH` 指向一个 `.cmd` 包装（cmd.exe 不受影响）：
+
+```powershell
+$env:GIT_SSH = "<repo>\tools\ssh_gh.cmd"
+git push -u origin main
+```
+
+> `~/.ssh/known_hosts` 在沙箱里不可写，所以包装里用 `UserKnownHostsFile=NUL`；
+> 副作用只是每次多打一行 `Permanently added ...` 的 warning，无害。
+
