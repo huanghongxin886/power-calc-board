@@ -1,0 +1,16 @@
+# 解包/临时产物
+build/
+unpacked/
+*.epru
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 系统/编辑器
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
