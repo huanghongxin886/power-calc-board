@@ -39,5 +39,5 @@ diff /tmp/a.txt /tmp/b.txt
 
 ## 注意
 
-- 工程里含嘉立创账号相关的 ID（`project_uuid`、`owner_uuid` 等），**公开仓库前想清楚**。
+- 工程里含嘉立创账号相关的 ID（`project_uuid`、`owner_uuid` 等），
 - 备份里带 `IMAGE/*.webp` 预览图，`.gitignore` 已经把解包目录排除，只保留 `render/` 里导出的 PNG。
