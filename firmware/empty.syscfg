@@ -1,0 +1,62 @@
+/**
+ * type-C口功率计算器放大板 —— 最小 SysConfig（只保留系统时钟 + SWD 调试口）
+ *
+ * 说明：本工程 OLED 采用【软件 SPI】，5 根信号线在 OLED_GPIO_Init() 里用
+ *       DL_GPIO_* 直接配置，因此这里不需要任何 GPIO / SPI 模块实例，
+ *       也就不会和本板实际的 OLED、INA228、按键引脚打架。
+ *
+ *       ⚠ 千万不要把蓝本工程 empty.syscfg 里那些外设模块直接搬过来：
+ *         其中 KEY S2=PA31、GRAY OUT8=PA22、IMU CS=PB6、SPI1 MISO=PB7、
+ *         KEY S4=PB2、ENCODER_B LB=PB12、HC05 STATE=PA16、UART_1=PB4/PB5
+ *         都会抢走本板 OLED / INA228 / 按键正在用的引脚（详见 README.md）。
+ *
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM0G350X" --part "Default" --package "LQFP-64(PM)" --product "mspm0_sdk@2.10.00.04"
+ * @v2CliArgs --device "MSPM0G3507" --package "LQFP-64(PM)" --product "mspm0_sdk@2.10.00.04"
+ * @versions {"tool":"1.27.0+4565"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+const Board  = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+/**
+ * Write custom configuration values to the imported modules.
+ * 时钟树与蓝本一致：SYSPLL 出 80MHz 给 CPU（PLL_PDIV=4, PLL_QDIV=10, UDIV=2）
+ */
+const divider7        = system.clockTree["PLL_PDIV"];
+divider7.divideValue  = 4;
+
+const divider9        = system.clockTree["UDIV"];
+divider9.divideValue  = 2;
+
+const multiplier2          = system.clockTree["PLL_QDIV"];
+multiplier2.multiplyValue  = 10;
+
+const mux8        = system.clockTree["HSCLKMUX"];
+mux8.inputSelect  = "HSCLKMUX_SYSPLL2X";
+
+SYSCTL.clockTreeEn = true;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals.
+ * 调试口固定用本板 U2 排针的 SWDIO=PA19 / SWCLK=PA20。
+ */
+Board.peripheral.$suggestSolution          = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution = "PA20";
+Board.peripheral.swdioPin.$suggestSolution = "PA19";
+
+/**
+ * 以后要用 INA228（I2C）时再加上下面这些（本板已确认可用的硬件 I2C1 引脚）：
+ *
+ * const I2C  = scripting.addModule("/ti/driverlib/I2C", {}, false);
+ * const I2C1 = I2C.addInstance();
+ * I2C1.$name                      = "I2C_INA228";
+ * I2C1.basicEnableController      = true;
+ * I2C1.peripheral.$assign         = "I2C1";
+ * I2C1.peripheral.sdaPin.$assign  = "PA16";   // 物理 9  脚 / 网络 SDA
+ * I2C1.peripheral.sclPin.$assign  = "PA17";   // 物理 10 脚 / 网络 SCL
+ */

@@ -1,0 +1,8 @@
+// J-Link Commander script: read-only connection test for the board's U4 (MSPM0G3507)
+// Usage:  double-click jlink_test.bat
+si SWD
+speed 1000
+connect
+mem32 0x00000000,4
+mem32 0x41C00000,1
+exit

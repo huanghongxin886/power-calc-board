@@ -1,0 +1,44 @@
+# ---- Keil MDK 编译产物 / 用户配置（不纳入版本管理）----
+Objects/
+Listings/
+*.o
+*.d
+*.crf
+*.axf
+*.hex
+*.bin
+*.lnp
+*.htm
+*.map
+*.dep
+*.iex
+*.sct.bak
+*.build_log.htm
+*.uvguix.*
+*.uvoptx
+JLinkLog.txt
+JLinkSettings.ini
+*.scvd
+*.dep
+
+# ---- 保留 uvprojx（工程文件要进仓库）----
+!*.uvprojx
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*~
+*.tmp
+*.bak
+*.orig
+
+# ---- 本仓库额外约定 ----
+# 厂商数据手册 PDF 不入库（版权 + 体积），本地保留 资料/INA228数据手册_ZHCSN47A_中文.pdf
+资料/*.pdf
+# 例外：保留 .uvoptx，因为探头序列号 / SWD 速率 / 烧录算法都写在这里
+!*.uvoptx
+!OLED版_0.96寸/*.uvoptx
+
+!JLinkSettings.ini
